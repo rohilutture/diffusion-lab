@@ -1,0 +1,8 @@
+# Procedural MovingShapes (16 frames, 32x32, 3 shape classes), factorized space-time DiT, flow matching. No download.
+out_dir: runs/video_flow
+path: flow
+cfg_scale: 1.5
+model: {kind: video_dit, frames: 16, img_size: 32, patch: 4, in_ch: 1, dim: 256, depth: 6, heads: 4, num_classes: 3}
+data: {kind: moving_shapes, n: 20000, frames: 16, size: 32, seed: 0}
+train: {steps: 60000, batch: 64, lr: 2.0e-4, ema: 0.9999, cfg_drop: 0.1, amp: true, clip: 1.0,
+        log_every: 100, sample_every: 5000, ckpt_every: 5000, workers: 4, seed: 0}

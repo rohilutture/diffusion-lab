@@ -1,0 +1,127 @@
+{
+ "points": {
+  "ref_vs_ref_1nna": 0.45703125,
+  "ref_vs_ref_mmd": 0.007895040325820446,
+  "n_gen": 256,
+  "n_ref": 256,
+  "runs": [
+   {
+    "sampler": "euler",
+    "nfe": 10,
+    "nfe_used": 10,
+    "cfg": 1.5,
+    "finite": true,
+    "mmd_cd": 0.02259148471057415,
+    "cov_cd": 0.0625,
+    "one_nna": 0.978515625,
+    "sample_s": 4.0
+   },
+   {
+    "sampler": "euler",
+    "nfe": 50,
+    "nfe_used": 50,
+    "cfg": 1.5,
+    "finite": true,
+    "mmd_cd": 0.007958433590829372,
+    "cov_cd": 0.47265625,
+    "one_nna": 0.607421875,
+    "sample_s": 9.49
+   },
+   {
+    "sampler": "heun",
+    "nfe": 10,
+    "nfe_used": 9,
+    "cfg": 1.5,
+    "finite": true,
+    "mmd_cd": 0.015825189650058746,
+    "cov_cd": 0.22265625,
+    "one_nna": 0.8828125,
+    "sample_s": 3.78
+   },
+   {
+    "sampler": "heun",
+    "nfe": 20,
+    "nfe_used": 19,
+    "cfg": 1.5,
+    "finite": true,
+    "mmd_cd": 0.008310281671583652,
+    "cov_cd": 0.51171875,
+    "one_nna": 0.775390625,
+    "sample_s": 5.18
+   },
+   {
+    "sampler": "heun",
+    "nfe": 20,
+    "nfe_used": 19,
+    "cfg": 1.0,
+    "finite": true,
+    "mmd_cd": 0.008202916011214256,
+    "cov_cd": 0.515625,
+    "one_nna": 0.779296875,
+    "sample_s": 3.89
+   },
+   {
+    "sampler": "heun",
+    "nfe": 20,
+    "nfe_used": 19,
+    "cfg": 3.0,
+    "finite": true,
+    "mmd_cd": 0.009773727506399155,
+    "cov_cd": 0.43359375,
+    "one_nna": 0.84765625,
+    "sample_s": 5.19
+   }
+  ]
+ },
+ "video": {
+  "real": {
+   "area_cv": 0.0,
+   "accel": 0.5,
+   "blank_frac": 0.0
+  },
+  "runs": [
+   {
+    "sampler": "euler",
+    "nfe": 10,
+    "nfe_used": 10,
+    "cfg": 1.5,
+    "finite": true,
+    "range": [
+     -1.139509677886963,
+     1.0583865642547607
+    ],
+    "area_cv": 0.0022035432048141956,
+    "accel": 0.9583280682563782,
+    "blank_frac": 0.00146484375
+   },
+   {
+    "sampler": "heun",
+    "nfe": 20,
+    "nfe_used": 19,
+    "cfg": 1.5,
+    "finite": true,
+    "range": [
+     -1.026381254196167,
+     1.0247200727462769
+    ],
+    "area_cv": 0.002051643328741193,
+    "accel": 0.8593525886535645,
+    "blank_frac": 0.0
+   },
+   {
+    "sampler": "heun",
+    "nfe": 20,
+    "nfe_used": 19,
+    "cfg": 3.0,
+    "finite": true,
+    "range": [
+     -1.030094027519226,
+     1.0365190505981445
+    ],
+    "area_cv": 0.0024148253723978996,
+    "accel": 0.8640480637550354,
+    "blank_frac": 0.0
+   }
+  ]
+ }
+}

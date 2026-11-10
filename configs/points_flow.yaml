@@ -1,0 +1,9 @@
+# Procedural PointShapes (5 solids, 512 points), point-cloud DiT, flow matching. No download.
+# For real data, switch `data` to {kind: shapenet_points, root: <dir of .npy clouds>, num_points: 2048}.
+out_dir: runs/points_flow
+path: flow
+cfg_scale: 1.5
+model: {kind: point_dit, dim: 256, depth: 8, heads: 4, num_classes: 5}
+data: {kind: point_shapes, n: 20000, num_points: 512, seed: 0}
+train: {steps: 60000, batch: 64, lr: 2.0e-4, ema: 0.9999, cfg_drop: 0.1, amp: true, clip: 1.0,
+        log_every: 100, sample_every: 5000, ckpt_every: 5000, workers: 4, seed: 0}
