@@ -4,5 +4,5 @@ path: flow
 cfg_scale: 1.5          # used for preview samples during training only
 model: {kind: dit, img_size: 32, patch: 2, in_ch: 3, dim: 384, depth: 12, heads: 6, num_classes: 10}
 data: {kind: cifar10, root: data, train: true, download: false, flip: true}
-train: {steps: 200000, batch: 128, lr: 2.0e-4, ema: 0.9999, cfg_drop: 0.1, amp: true, clip: 1.0,
+train: {steps: 100000, batch: 128, lr: 2.0e-4, ema: 0.9999, cfg_drop: 0.1, amp: true, clip: 1.0,
         log_every: 100, sample_every: 10000, ckpt_every: 5000, workers: 4, seed: 0}
