@@ -1,8 +1,28 @@
 # Diffusion lab: image, video, and 3D point-cloud generation
 
-Status: **32 CPU tests pass, and two models have been trained to completion on an RTX 5090 on procedural data (point
-clouds and toy video, 60,000 steps each, one seed). The image/CIFAR-10 model and FID have NOT been run (they need a
-dataset download). Results below are for toy procedural data only.**
+Status: **32 CPU tests pass. On one RTX 5090: two models trained on procedural data (point clouds and toy video, 60,000
+steps each) and a CIFAR-10 flow-matching vs VP-diffusion comparison (DiT-S/2, 100,000 steps each, one seed) scored with
+FID at 10,000 samples. The FID numbers come from my own pipeline (torch-fidelity Inception, 10k generated samples) and are
+NOT comparable to published CIFAR-10 FIDs.**
+
+## CIFAR-10 FID vs number of network evaluations (`results/fid_flow.csv`, `results/fid_vp.csv`; unguided, EMA weights)
+
+Same network, data, optimizer and 100,000 steps (batch 128, lr 2e-4) for both probability paths. n=10,000 samples, one
+training seed, one sampling run per cell (lower is better).
+
+| NFE | Flow + Euler | Flow + Heun | VP + DDIM | VP + DPM-Solver++(2M) |
+|---|---|---|---|---|
+| 10 | 22.26 | 19.73 (9 NFE) | 22.22 | 18.80 |
+| 20 | 17.26 | 16.87 (19) | 18.35 | 17.03 |
+| 50 | 14.14 | 14.32 (49) | 15.65 | 15.09 |
+| 100 | 13.31 | 13.31 (99) | 14.46 | 14.19 |
+
+- Flow matching reached lower FID than VP diffusion at 50 and 100 NFE (13.3 vs 14.2-14.5 at 100), by about 1 FID.
+  The higher-order solvers help mainly at very low NFE (about 3 FID at 10 NFE) and give no gain by 50-100.
+- With one seed and one sampling run per cell, differences under about 1 FID should not be read as real; the 100-NFE
+  flow vs VP gap is near that size. The ordering is suggestive, not established.
+- Absolute values are well above published DiT/flow numbers: the model is small and 10k-sample FID is biased upward
+  versus 50k. Compare cells with each other only.
 
 ## Results (`scripts/eval_trained.py`, `results/eval_trained.json`; EMA weights, one training seed)
 
@@ -63,7 +83,7 @@ Classifier-free guidance is built in (label dropout in training, `cfg_scale` at 
 - Tiny end-to-end runs: loss falls, checkpoint reloads, sampling (with guidance) stays finite, resume continues
   the step counter.
 
-## Planned experiments (video and point-cloud parts done above on procedural data; CIFAR-10 flow-vs-VP FID not run)
+## Experiments (video, point-cloud and CIFAR-10 flow-vs-VP FID done above; guidance sweep not run)
 
 1. **Flow vs diffusion, same network, data and budget** (`configs/cifar_flow.yaml`, `configs/cifar_vp.yaml`):
    FID vs NFE for Euler/Heun (flow) and DDIM/DPM-Solver++ (VP) at NFE 10/20/50/100 (`eval_fid.py`). The
